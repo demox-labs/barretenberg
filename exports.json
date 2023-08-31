@@ -20,6 +20,98 @@
     "isAsync": false
   },
   {
+    "functionName": "bn254_sub_fields",
+    "inArgs": [
+      {
+        "name": "left",
+        "type": "fr::in_buf"
+      },
+      {
+        "name": "right",
+        "type": "fr::in_buf"
+      }
+    ],
+    "outArgs": [
+      {
+        "name": "result",
+        "type": "fr::out_buf"
+      }
+    ],
+    "isAsync": false
+  },
+  {
+    "functionName": "bn254_mul_fields",
+    "inArgs": [
+      {
+        "name": "left",
+        "type": "fr::in_buf"
+      },
+      {
+        "name": "right",
+        "type": "fr::in_buf"
+      }
+    ],
+    "outArgs": [
+      {
+        "name": "result",
+        "type": "fr::out_buf"
+      }
+    ],
+    "isAsync": false
+  },
+  {
+    "functionName": "bn254_invert_field",
+    "inArgs": [
+      {
+        "name": "input",
+        "type": "fr::in_buf"
+      }
+    ],
+    "outArgs": [
+      {
+        "name": "result",
+        "type": "fr::out_buf"
+      }
+    ],
+    "isAsync": false
+  },
+  {
+    "functionName": "bn254_exp_field",
+    "inArgs": [
+      {
+        "name": "base",
+        "type": "fr::in_buf"
+      },
+      {
+        "name": "exp",
+        "type": "fr::in_buf"
+      }
+    ],
+    "outArgs": [
+      {
+        "name": "result",
+        "type": "fr::out_buf"
+      }
+    ],
+    "isAsync": false
+  },
+  {
+    "functionName": "bn254_sqrt_field",
+    "inArgs": [
+      {
+        "name": "base",
+        "type": "fr::in_buf"
+      }
+    ],
+    "outArgs": [
+      {
+        "name": "result",
+        "type": "fr::out_buf"
+      }
+    ],
+    "isAsync": false
+  },
+  {
     "functionName": "pedersen___init",
     "inArgs": [],
     "outArgs": [],

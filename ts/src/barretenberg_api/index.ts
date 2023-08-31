@@ -22,6 +22,31 @@ export class BarretenbergApi {
     return result[0];
   }
 
+  async subFields(left: Fr, right: Fr): Promise<Fr> {
+    const result = await this.binder.callWasmExport('bn254_sub_fields', [left, right], [Fr]);
+    return result[0];
+  }
+
+  async mulFields(left: Fr, right: Fr): Promise<Fr> {
+    const result = await this.binder.callWasmExport('bn254_mul_fields', [left, right], [Fr]);
+    return result[0];
+  }
+
+  async invertField(input: Fr): Promise<Fr> {
+    const result = await this.binder.callWasmExport('bn254_invert_field', [input], [Fr]);
+    return result[0];
+  }
+
+  async expField(base: Fr, exp: Fr): Promise<Fr> {
+    const result = await this.binder.callWasmExport('bn254_exp_field', [base, exp], [Fr]);
+    return result[0];
+  }
+
+  async sqrtField(base: Fr): Promise<Fr> {
+    const result = await this.binder.callWasmExport('bn254_sqrt_field', [base], [Fr]);
+    return result[0];
+  }
+
   async pedersenInit(): Promise<void> {
     const result = await this.binder.callWasmExport('pedersen___init', [], []);
     return;
@@ -357,6 +382,31 @@ export class BarretenbergApiSync {
 
   addFields(left: Fr, right: Fr): Fr {
     const result = this.binder.callWasmExport('bn254_add_fields', [left, right], [Fr]);
+    return result[0];
+  }
+
+  subFields(left: Fr, right: Fr): Promise<Fr> {
+    const result = this.binder.callWasmExport('bn254_sub_fields', [left, right], [Fr]);
+    return result[0];
+  }
+
+  mulFields(left: Fr, right: Fr): Promise<Fr> {
+    const result = this.binder.callWasmExport('bn254_mul_fields', [left, right], [Fr]);
+    return result[0];
+  }
+
+  invertField(input: Fr): Promise<Fr> {
+    const result = this.binder.callWasmExport('bn254_invert_field', [input], [Fr]);
+    return result[0];
+  }
+
+  expField(base: Fr, exp: Fr): Promise<Fr> {
+    const result = this.binder.callWasmExport('bn254_exp_field', [base, exp], [Fr]);
+    return result[0];
+  }
+
+  sqrtField(base: Fr): Promise<Fr> {
+    const result = this.binder.callWasmExport('bn254_sqrt_field', [base], [Fr]);
     return result[0];
   }
 
