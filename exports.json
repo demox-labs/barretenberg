@@ -1,5 +1,25 @@
 [
   {
+    "functionName": "bn254_add_fields",
+    "inArgs": [
+      {
+        "name": "left",
+        "type": "fr::in_buf"
+      },
+      {
+        "name": "right",
+        "type": "fr::in_buf"
+      }
+    ],
+    "outArgs": [
+      {
+        "name": "result",
+        "type": "fr::out_buf"
+      }
+    ],
+    "isAsync": false
+  },
+  {
     "functionName": "pedersen___init",
     "inArgs": [],
     "outArgs": [],

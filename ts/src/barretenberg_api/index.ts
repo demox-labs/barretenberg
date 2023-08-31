@@ -17,6 +17,11 @@ export class BarretenbergApi {
     await this.binder.wasm.destroy();
   }
 
+  async addFields(left: Fr, right: Fr): Promise<Fr> {
+    const result = await this.binder.callWasmExport('bn254_add_fields', [left, right], [Fr]);
+    return result[0];
+  }
+
   async pedersenInit(): Promise<void> {
     const result = await this.binder.callWasmExport('pedersen___init', [], []);
     return;
@@ -348,6 +353,11 @@ export class BarretenbergApiSync {
 
   async destroy() {
     await this.binder.wasm.destroy();
+  }
+
+  addFields(left: Fr, right: Fr): Fr {
+    const result = this.binder.callWasmExport('bn254_add_fields', [left, right], [Fr]);
+    return result[0];
   }
 
   pedersenInit(): void {

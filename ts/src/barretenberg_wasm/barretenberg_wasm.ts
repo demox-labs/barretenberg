@@ -53,7 +53,7 @@ export class BarretenbergWasm {
    * Init as main thread. Spawn child threads.
    */
   public async init(
-    threads = Math.min(getNumCpu(), BarretenbergWasm.MAX_THREADS),
+    threads = 1,
     logger: (msg: string) => void = debug,
     initial = 25,
     maximum = 2 ** 16,

@@ -45,10 +45,6 @@ module.exports = {
           from: `../cpp/build-wasm/bin/barretenberg.wasm`,
           to: '../barretenberg.wasm',
         },
-        {
-          from: `../cpp/build-wasm-threads/bin/barretenberg.wasm`,
-          to: '../barretenberg-threads.wasm',
-        },
       ],
     }),
   ],

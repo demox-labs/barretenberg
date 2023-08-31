@@ -3,9 +3,7 @@ import { BarretenbergWasmWorker, type BarretenbergWasm } from '../barretenberg_w
 import debug from 'debug';
 
 export async function fetchCode(multithreading: boolean) {
-  const wasmModuleUrl = multithreading
-    ? new URL(`../../barretenberg-threads.wasm`, import.meta.url)
-    : new URL(`../../barretenberg.wasm`, import.meta.url);
+  const wasmModuleUrl = new URL(`../../barretenberg.wasm`, import.meta.url);
   const res = await fetch(wasmModuleUrl.href);
   return await res.arrayBuffer();
 }
