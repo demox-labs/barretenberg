@@ -51,6 +51,7 @@ export class Fr {
 }
 
 export class Fq {
+  static ZERO = new Fq(0n);
   static MODULUS = 0x30644e72e131a029b85045b68181585d97816a916871ca8d3c208c16d87cfd47n;
   static MAX_VALUE = this.MODULUS - 1n;
   static SIZE_IN_BYTES = 32;

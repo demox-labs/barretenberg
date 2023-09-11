@@ -1,5 +1,6 @@
 #include "g1.hpp"
 #include <gtest/gtest.h>
+#include <iostream>
 
 using namespace barretenberg;
 
@@ -7,6 +8,7 @@ namespace test_g1 {
 TEST(g1, RandomElement)
 {
     g1::element result = g1::element::random_element();
+    std::cout << "a long message to output???";
     EXPECT_EQ(result.on_curve(), true);
 }
 
@@ -20,6 +22,7 @@ TEST(g1, Eq)
 {
     g1::element a = g1::element::random_element();
     g1::element b = a.normalize();
+    std::cout << a;
 
     EXPECT_EQ(a == b, true);
     EXPECT_EQ(a == a, true);
@@ -58,6 +61,12 @@ TEST(g1, MixedAddCheckAgainstConstants)
     expected.x = expected_x.to_montgomery_form();
     expected.y = expected_y.to_montgomery_form();
     expected.z = expected_z.to_montgomery_form();
+    std::cout << "lhs: " << lhs << "\nrhs: " << rhs << "\nexpected: " << expected << "\n\n";
+    g1::element thing_to_double = g1::element(rhs);
+    g1::element doubled = thing_to_double.dbl();
+    auto doubled_affine = doubled.normalize();
+    std::cout << "\ndoubled: " << doubled;
+    std::cout << "\ndoubled affine: " << doubled_affine;
     result = lhs + rhs;
 
     EXPECT_EQ(result == expected, true);

@@ -4,17 +4,17 @@
     "inArgs": [
       {
         "name": "left",
-        "type": "fr::in_buf"
+        "type": "fq::in_buf"
       },
       {
         "name": "right",
-        "type": "fr::in_buf"
+        "type": "fq::in_buf"
       }
     ],
     "outArgs": [
       {
         "name": "result",
-        "type": "fr::out_buf"
+        "type": "fq::out_buf"
       }
     ],
     "isAsync": false
@@ -24,17 +24,17 @@
     "inArgs": [
       {
         "name": "left",
-        "type": "fr::in_buf"
+        "type": "fq::in_buf"
       },
       {
         "name": "right",
-        "type": "fr::in_buf"
+        "type": "fq::in_buf"
       }
     ],
     "outArgs": [
       {
         "name": "result",
-        "type": "fr::out_buf"
+        "type": "fq::out_buf"
       }
     ],
     "isAsync": false
@@ -44,17 +44,17 @@
     "inArgs": [
       {
         "name": "left",
-        "type": "fr::in_buf"
+        "type": "fq::in_buf"
       },
       {
         "name": "right",
-        "type": "fr::in_buf"
+        "type": "fq::in_buf"
       }
     ],
     "outArgs": [
       {
         "name": "result",
-        "type": "fr::out_buf"
+        "type": "fq::out_buf"
       }
     ],
     "isAsync": false
@@ -64,13 +64,13 @@
     "inArgs": [
       {
         "name": "input",
-        "type": "fr::in_buf"
+        "type": "fq::in_buf"
       }
     ],
     "outArgs": [
       {
         "name": "result",
-        "type": "fr::out_buf"
+        "type": "fq::out_buf"
       }
     ],
     "isAsync": false
@@ -80,17 +80,17 @@
     "inArgs": [
       {
         "name": "base",
-        "type": "fr::in_buf"
+        "type": "fq::in_buf"
       },
       {
         "name": "exp",
-        "type": "fr::in_buf"
+        "type": "fq::in_buf"
       }
     ],
     "outArgs": [
       {
         "name": "result",
-        "type": "fr::out_buf"
+        "type": "fq::out_buf"
       }
     ],
     "isAsync": false
@@ -100,16 +100,87 @@
     "inArgs": [
       {
         "name": "base",
-        "type": "fr::in_buf"
+        "type": "fq::in_buf"
       }
     ],
     "outArgs": [
       {
         "name": "result",
-        "type": "fr::out_buf"
+        "type": "fq::out_buf"
       }
     ],
     "isAsync": false
+  },
+  {
+    "functionName": "bn254_random_point",
+    "inArgs": [],
+    "outArgs": [
+      {
+        "name": "result",
+        "type": "uint8_t"
+      }
+    ]
+  },
+  {
+    "functionName": "bn254_add_points",
+    "inArgs": [
+      {
+        "name": "left",
+        "type": "uint8_t"
+      },
+      {
+        "name": "right",
+        "type": "uint8_t"
+      }
+    ],
+    "outArgs": [
+      {
+        "name": "result",
+        "type": "uint8_t"
+      }
+    ]
+  },
+  {
+    "functionName": "bn254_double_point",
+    "inArgs": [
+      {
+        "name": "p1_x",
+        "type": "fq::in_buf"
+      },
+      {
+        "name": "p1_y",
+        "type": "fq::in_buf"
+      }
+    ],
+    "outArgs": [
+      {
+        "name": "x",
+        "type": "fq::out_buf"
+      },
+      {
+        "name": "z",
+        "type": "fq::out_buf"
+      }
+    ]
+  },
+  {
+    "functionName": "bn254_add_points",
+    "inArgs": [
+      {
+        "name": "left",
+        "type": "uint8_t"
+      },
+      {
+        "name": "right",
+        "type": "uint8_t"
+      }
+    ],
+    "outArgs": [
+      {
+        "name": "result",
+        "type": "uint8_t"
+      }
+    ]
   },
   {
     "functionName": "pedersen___init",

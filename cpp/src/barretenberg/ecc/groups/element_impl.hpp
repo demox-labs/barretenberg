@@ -1,5 +1,6 @@
 #pragma once
 #include "barretenberg/ecc/groups/element.hpp"
+#include <iostream>
 
 // NOLINTBEGIN(readability-implicit-bool-conversion, cppcoreguidelines-avoid-c-arrays)
 namespace barretenberg::group_elements {
@@ -83,20 +84,27 @@ template <class Fq, class Fr, class T> constexpr void element<Fq, Fr, T>::self_d
         }
     }
 
+    std::cout << "self_dbl: " << x;
+
     // T0 = x*x
     Fq T0 = x.sqr();
+    std::cout << "\nx squared: " << T0;
 
     // T1 = y*y
     Fq T1 = y.sqr();
+    std::cout << "\ny squared: " << T1;
 
     // T2 = T2*T1 = y*y*y*y
     Fq T2 = T1.sqr();
+    std::cout << "\ny to the fourth: " << T2;
 
     // T1 = T1 + x = x + y*y
     T1 += x;
+    std::cout << "\nx + y squared: " << T1;
 
     // T1 = T1 * T1
     T1.self_sqr();
+    std::cout << "\nT1: " << T1;
 
     // T3 = T0 + T2 = xx + y*y*y*y
     Fq T3 = T0 + T2;
@@ -111,8 +119,11 @@ template <class Fq, class Fr, class T> constexpr void element<Fq, Fr, T>::self_d
     T3 = T0 + T0;
     T3 += T0;
     if constexpr (T::has_a) {
+        std::cout << "\na: " << T::a;
         T3 += (T::a * z.sqr().sqr());
     }
+
+    std::cout << "\nT3: " << T3;
 
     // z2 = 2*y*z
     z += z;

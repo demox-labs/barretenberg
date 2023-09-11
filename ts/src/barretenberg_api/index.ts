@@ -17,33 +17,38 @@ export class BarretenbergApi {
     await this.binder.wasm.destroy();
   }
 
-  async addFields(left: Fr, right: Fr): Promise<Fr> {
-    const result = await this.binder.callWasmExport('bn254_add_fields', [left, right], [Fr]);
+  async randomPoint(): Promise<Point> {
+    const result = await this.binder.callWasmExport('bn254_random_point', [], [Point]);
     return result[0];
   }
 
-  async subFields(left: Fr, right: Fr): Promise<Fr> {
-    const result = await this.binder.callWasmExport('bn254_sub_fields', [left, right], [Fr]);
+  async addFields(left: Fq, right: Fq): Promise<Fq> {
+    const result = await this.binder.callWasmExport('bn254_add_fields', [left, right], [Fq]);
     return result[0];
   }
 
-  async mulFields(left: Fr, right: Fr): Promise<Fr> {
-    const result = await this.binder.callWasmExport('bn254_mul_fields', [left, right], [Fr]);
+  async subFields(left: Fq, right: Fq): Promise<Fq> {
+    const result = await this.binder.callWasmExport('bn254_sub_fields', [left, right], [Fq]);
     return result[0];
   }
 
-  async invertField(input: Fr): Promise<Fr> {
-    const result = await this.binder.callWasmExport('bn254_invert_field', [input], [Fr]);
+  async mulFields(left: Fq, right: Fq): Promise<Fq> {
+    const result = await this.binder.callWasmExport('bn254_mul_fields', [left, right], [Fq]);
     return result[0];
   }
 
-  async expField(base: Fr, exp: Fr): Promise<Fr> {
-    const result = await this.binder.callWasmExport('bn254_exp_field', [base, exp], [Fr]);
+  async invertField(input: Fq): Promise<Fq> {
+    const result = await this.binder.callWasmExport('bn254_invert_field', [input], [Fq]);
     return result[0];
   }
 
-  async sqrtField(base: Fr): Promise<Fr> {
-    const result = await this.binder.callWasmExport('bn254_sqrt_field', [base], [Fr]);
+  async expField(base: Fq, exp: Fq): Promise<Fq> {
+    const result = await this.binder.callWasmExport('bn254_exp_field', [base, exp], [Fq]);
+    return result[0];
+  }
+
+  async sqrtField(base: Fq): Promise<Fq> {
+    const result = await this.binder.callWasmExport('bn254_sqrt_field', [base], [Fq]);
     return result[0];
   }
 
@@ -380,33 +385,48 @@ export class BarretenbergApiSync {
     await this.binder.wasm.destroy();
   }
 
-  addFields(left: Fr, right: Fr): Fr {
-    const result = this.binder.callWasmExport('bn254_add_fields', [left, right], [Fr]);
+  randomPoint(): Point {
+    const result = this.binder.callWasmExport('bn254_random_point', [], [Point]);
     return result[0];
   }
 
-  subFields(left: Fr, right: Fr): Promise<Fr> {
-    const result = this.binder.callWasmExport('bn254_sub_fields', [left, right], [Fr]);
+  addPoints(p1X: Fq, p1Y: Fq, p2X: Fq, p2Y: Fq): Fq {
+    const result = this.binder.callWasmExport('bn254_add_points', [p1X, p1Y, p2X, p2Y], [Fq]);
     return result[0];
   }
 
-  mulFields(left: Fr, right: Fr): Promise<Fr> {
-    const result = this.binder.callWasmExport('bn254_mul_fields', [left, right], [Fr]);
+  doublePoint(pX: Fq, pY: Fq): [Fq, Fq] {
+    const result = this.binder.callWasmExport('bn254_double_point', [pX, pY], [Fq, Fq]);
+    return [result[0], result[1]];
+  }
+
+  addFields(left: Fq, right: Fq): Fq {
+    const result = this.binder.callWasmExport('bn254_add_fields', [left, right], [Fq]);
     return result[0];
   }
 
-  invertField(input: Fr): Promise<Fr> {
-    const result = this.binder.callWasmExport('bn254_invert_field', [input], [Fr]);
+  subFields(left: Fq, right: Fq): Fq {
+    const result = this.binder.callWasmExport('bn254_sub_fields', [left, right], [Fq]);
     return result[0];
   }
 
-  expField(base: Fr, exp: Fr): Promise<Fr> {
-    const result = this.binder.callWasmExport('bn254_exp_field', [base, exp], [Fr]);
+  mulFields(left: Fq, right: Fq): Fq {
+    const result = this.binder.callWasmExport('bn254_mul_fields', [left, right], [Fq]);
     return result[0];
   }
 
-  sqrtField(base: Fr): Promise<Fr> {
-    const result = this.binder.callWasmExport('bn254_sqrt_field', [base], [Fr]);
+  invertField(input: Fq): Fq {
+    const result = this.binder.callWasmExport('bn254_invert_field', [input], [Fq]);
+    return result[0];
+  }
+
+  expField(base: Fq, exp: Fq): Fq {
+    const result = this.binder.callWasmExport('bn254_exp_field', [base, exp], [Fq]);
+    return result[0];
+  }
+
+  sqrtField(base: Fq): Fq {
+    const result = this.binder.callWasmExport('bn254_sqrt_field', [base], [Fq]);
     return result[0];
   }
 

@@ -9,6 +9,9 @@
 namespace barretenberg {
 class Bn254FqParams {
   public:
+    // this modulus is the value:
+    // 0x30644e72e131a029b85045b68181585d97816a916871ca8d3C208C16D87CFD47
+    // 21888242871839275222246405745257275088696311157297823662689037894645226208583
     static constexpr uint64_t modulus_0 = 0x3C208C16D87CFD47UL;
     static constexpr uint64_t modulus_1 = 0x97816a916871ca8dUL;
     static constexpr uint64_t modulus_2 = 0xb85045b68181585dUL;
