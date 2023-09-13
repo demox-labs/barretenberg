@@ -158,7 +158,7 @@
         "type": "fq::out_buf"
       },
       {
-        "name": "z",
+        "name": "y",
         "type": "fq::out_buf"
       }
     ]
@@ -177,8 +177,12 @@
     ],
     "outArgs": [
       {
-        "name": "result",
-        "type": "uint8_t"
+        "name": "x",
+        "type": "fq::out_buf"
+      },
+      {
+        "name": "y",
+        "type": "fq::out_buf"
       }
     ]
   },

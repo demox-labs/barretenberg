@@ -390,9 +390,9 @@ export class BarretenbergApiSync {
     return result[0];
   }
 
-  addPoints(p1X: Fq, p1Y: Fq, p2X: Fq, p2Y: Fq): Fq {
-    const result = this.binder.callWasmExport('bn254_add_points', [p1X, p1Y, p2X, p2Y], [Fq]);
-    return result[0];
+  addPoints(p1X: Fq, p1Y: Fq, p2X: Fq, p2Y: Fq): [Fq, Fq] {
+    const result = this.binder.callWasmExport('bn254_add_points', [p1X, p1Y, p2X, p2Y], [Fq, Fq]);
+    return [result[0], result[1]];
   }
 
   doublePoint(pX: Fq, pY: Fq): [Fq, Fq] {

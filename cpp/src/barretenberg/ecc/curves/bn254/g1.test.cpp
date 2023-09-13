@@ -46,6 +46,9 @@ TEST(g1, MixedAddCheckAgainstConstants)
     fq a_z{ 0xfef593c9ce1df132, 0xe0486f801303c27d, 0x9bbd01ab881dc08e, 0x2a589badf38ec0f9 };
     fq b_x{ 0xa1ec5d1398660db8, 0x6be3e1f6fd5d8ab1, 0x69173397dd272e11, 0x12575bbfe1198886 };
     fq b_y{ 0xcfbfd4441138823e, 0xb5f817e28a1ef904, 0xefb7c5629dcc1c42, 0x1a9ed3d6f846230e };
+
+    std::cout << "fq bx: " << b_x << "\nfq by: " << b_y << "\n\n";
+    std::cout << "fq bx mont \n" << b_x.to_montgomery_form();
     fq expected_x{ 0x2a9d0201fccca20, 0x36f969b294f31776, 0xee5534422a6f646, 0x911dbc6b02310b6 };
     fq expected_y{ 0x14c30aaeb4f135ef, 0x9c27c128ea2017a1, 0xf9b7d80c8315eabf, 0x35e628df8add760 };
     fq expected_z{ 0xa43fe96673d10eb3, 0x88fbe6351753d410, 0x45c21cc9d99cb7d, 0x3018020aa6e9ede5 };
@@ -56,6 +59,10 @@ TEST(g1, MixedAddCheckAgainstConstants)
     lhs.x = a_x.to_montgomery_form();
     lhs.y = a_y.to_montgomery_form();
     lhs.z = a_z.to_montgomery_form();
+
+
+
+
     rhs.x = b_x.to_montgomery_form();
     rhs.y = b_y.to_montgomery_form();
     expected.x = expected_x.to_montgomery_form();
@@ -66,7 +73,7 @@ TEST(g1, MixedAddCheckAgainstConstants)
     g1::element doubled = thing_to_double.dbl();
     auto doubled_affine = doubled.normalize();
     std::cout << "\ndoubled: " << doubled;
-    std::cout << "\ndoubled affine: " << doubled_affine;
+    std::cout << "\ndoubled affine: " << doubled_affine.x;
     result = lhs + rhs;
 
     EXPECT_EQ(result == expected, true);
