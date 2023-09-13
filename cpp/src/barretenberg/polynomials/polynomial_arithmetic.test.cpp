@@ -95,6 +95,32 @@ TEST(polynomials, split_polynomial_evaluate)
               polynomial_arithmetic::evaluate(poly, z, n));
 }
 
+TEST(polynomials, print_domain)
+{
+    constexpr size_t n = 4096 * 4096;
+    // barretenberg::evaluation_domain(4);
+    auto domain = barretenberg::evaluation_domain(513);
+    domain.compute_lookup_table();
+
+    std::cout << "n: " << n << std::endl;
+
+    const std::vector<fr*> round_roots = domain.get_round_roots();
+    std::cout << "round_roots: ";
+    for(const auto& root : round_roots)
+    {
+        if(root) // check if the pointer is not null before dereferencing it
+        {
+            std::cout << *root << " "; // dereference the pointer to print the value
+            std::cout << std::endl;
+        }
+        else
+        {
+            std::cout << "null ";
+        }
+    }
+    std::cout << std::endl;
+}
+
 TEST(polynomials, basic_fft)
 {
     constexpr size_t n = 1 << 14;
@@ -125,6 +151,7 @@ TEST(polynomials, fft_ifft_consistency)
     for (size_t i = 0; i < n; ++i) {
         result[i] = fr::random_element();
         fr::__copy(result[i], expected[i]);
+        // std::cout << result[i] << std::endl;
     }
 
     auto domain = evaluation_domain(n);
@@ -134,6 +161,23 @@ TEST(polynomials, fft_ifft_consistency)
 
     for (size_t i = 0; i < n; ++i) {
         EXPECT_EQ((result[i] == expected[i]), true);
+    }
+
+    for(const auto& root : domain.get_round_roots())
+    {
+        if(root) // check if the pointer is not null before dereferencing it
+        {
+            std::cout << *root << " "; // dereference the pointer to print the value
+            std::cout << std::endl;
+        }
+        else
+        {
+            std::cout << "null ";
+        }
+    }
+
+    for (size_t i = 1; i <= 24; ++i) {
+        std::cout << "'" << fr::get_root_of_unity(i) << "'," << std::endl;
     }
 }
 

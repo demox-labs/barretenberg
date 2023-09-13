@@ -376,6 +376,21 @@ export class BarretenbergApi {
     );
     return result as any;
   }
+
+  async fft(coeff: Fr[], evaulation_domain: Ptr): Promise<Fr[]> {
+    const result = await this.binder.callWasmExport('fft', [coeff, evaulation_domain], [VectorDeserializer(Fr)]);
+    return result[0];
+  }
+
+  async randomPolynomial(degree: number): Promise<Fr[]> {
+    const result = await this.binder.callWasmExport('random_polynomial', [degree], [VectorDeserializer(Fr)]);
+    return result[0];
+  }
+
+  async newEvaluationDomain(degree: number): Promise<Ptr> {
+    const result = await this.binder.callWasmExport('new_evaluation_domain', [degree], [Ptr]);
+    return result[0];
+  }
 }
 
 export class BarretenbergApiSync {
@@ -725,5 +740,20 @@ export class BarretenbergApiSync {
       [VectorDeserializer(Fr), Fr],
     );
     return result as any;
+  }
+
+  fft(coeff: Fr[], evaulation_domain: Ptr): Fr[] {
+    const result = this.binder.callWasmExport('fft', [coeff, evaulation_domain], [VectorDeserializer(Fr)]);
+    return result[0];
+  }
+
+  randomPolynomial(degree: number): Fr[] {
+    const result = this.binder.callWasmExport('random_polynomial', [degree], [VectorDeserializer(Fr)]);
+    return result[0];
+  }
+
+  newEvaluationDomain(degree: number): Ptr {
+    const result = this.binder.callWasmExport('new_evaluation_domain', [degree], [Ptr]);
+    return result[0];
   }
 }
