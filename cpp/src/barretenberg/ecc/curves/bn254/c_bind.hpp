@@ -26,4 +26,6 @@ WASM_EXPORT void bn254_add_points(fq::in_buf p1_x, fq::in_buf p1_y, fq::in_buf p
 WASM_EXPORT void bn254_double_point(fq::in_buf p1_x, fq::in_buf p1_y, fq::out_buf x, fq::out_buf y);
 
 WASM_EXPORT void bn254_point_scalar(fq::in_buf p_x, fq::in_buf p_y, fr::in_buf scalar, fq::out_buf x, fq::out_buf y);
+
+WASM_EXPORT void bn254_msm(g1::affine_element::vec_in_buf points_data, fr::vec_in_buf scalars_data, fq::out_buf x, fq::out_buf y);
 }

@@ -191,6 +191,29 @@
     ]
   },
   {
+    "functionName": "bn254_msm",
+    "inArgs": [
+      {
+        "name": "points_data",
+        "type": "g1::affine_element::vec_in_buf"
+      },
+      {
+        "name": "scalars_data",
+        "type": "fr::vec_in_buf"
+      }
+    ],
+    "outArgs": [
+      {
+        "name": "x",
+        "type": "fq::out_buf"
+      },
+      {
+        "name": "y",
+        "type": "fq::out_buf"
+      }
+    ]
+  },
+  {
     "functionName": "bn254_add_points",
     "inArgs": [
       {

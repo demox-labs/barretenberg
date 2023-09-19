@@ -1,4 +1,6 @@
 #include "barretenberg/common/serialize.hpp"
+#include "barretenberg/ecc/curves/bn254/bn254.hpp"
+#include "barretenberg/ecc/scalar_multiplication/scalar_multiplication.hpp"
 #include "c_bind.hpp"
 #include "g1.hpp"
 
@@ -100,6 +102,19 @@ WASM_EXPORT void bn254_point_scalar(fq::in_buf p_x, fq::in_buf p_y, fr::in_buf s
     g1::element ext_point = g1::element(point);
     auto scalar_base = barretenberg::fr::serialize_from_buffer(scalar);
     g1::element result = ext_point * scalar_base;
+    auto normalized = result.normalize();
+    barretenberg::fq::serialize_to_buffer(normalized.x, x);
+    barretenberg::fq::serialize_to_buffer(normalized.y, y);
+}
+
+WASM_EXPORT void bn254_msm(g1::affine_element::vec_in_buf points_data, fr::vec_in_buf scalars_data, fq::out_buf x, fq::out_buf y)
+{
+    auto points_vec = from_buffer<std::vector<g1::affine_element>>(points_data);
+    auto scalars_vec = from_buffer<std::vector<fr>>(scalars_data);
+    size_t NUM_POINTS = scalars_vec.size();
+    scalar_multiplication::pippenger_runtime_state<curve::BN254> state(NUM_POINTS);
+    g1::element result = scalar_multiplication::pippenger_unsafe<curve::BN254>(
+        &scalars_vec[0], &points_vec[0], NUM_POINTS, state);
     auto normalized = result.normalize();
     barretenberg::fq::serialize_to_buffer(normalized.x, x);
     barretenberg::fq::serialize_to_buffer(normalized.y, y);
