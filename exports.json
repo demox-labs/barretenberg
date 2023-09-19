@@ -164,6 +164,33 @@
     ]
   },
   {
+    "functionName": "bn254_point_scalar",
+    "inArgs": [
+      {
+        "name": "p_x",
+        "type": "fq::in_buf"
+      },
+      {
+        "name": "p_y",
+        "type": "fq::in_buf"
+      },
+      {
+        "name": "scalar",
+        "type": "fr::in_buf"
+      }
+    ],
+    "outArgs": [
+      {
+        "name": "x",
+        "type": "fq::out_buf"
+      },
+      {
+        "name": "y",
+        "type": "fq::out_buf"
+      }
+    ]
+  },
+  {
     "functionName": "bn254_add_points",
     "inArgs": [
       {

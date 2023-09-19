@@ -420,6 +420,11 @@ export class BarretenbergApiSync {
     return result[0];
   }
 
+  pointScalar(px: Fq, py: Fq, scalar: Fr): [Fq, Fq] {
+    const result = this.binder.callWasmExport('bn254_point_scalar', [px, py, scalar], [Fq, Fq]);
+    return [result[0], result[1]];
+  }
+
   subFields(left: Fq, right: Fq): Fq {
     const result = this.binder.callWasmExport('bn254_sub_fields', [left, right], [Fq]);
     return result[0];

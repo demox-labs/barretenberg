@@ -89,4 +89,19 @@ WASM_EXPORT void bn254_double_point(fq::in_buf p1_x, fq::in_buf p1_y, fq::out_bu
     barretenberg::fq::serialize_to_buffer(normalized.x, x);
     barretenberg::fq::serialize_to_buffer(normalized.y, y);
 }
+
+WASM_EXPORT void bn254_point_scalar(fq::in_buf p_x, fq::in_buf p_y, fr::in_buf scalar, fq::out_buf x, fq::out_buf y)
+{
+    auto p_x_fq = barretenberg::fq::serialize_from_buffer(p_x);
+    auto p_y_fq = barretenberg::fq::serialize_from_buffer(p_y);
+    g1::affine_element point;
+    point.x = p_x_fq;
+    point.y = p_y_fq;
+    g1::element ext_point = g1::element(point);
+    auto scalar_base = barretenberg::fr::serialize_from_buffer(scalar);
+    g1::element result = ext_point * scalar_base;
+    auto normalized = result.normalize();
+    barretenberg::fq::serialize_to_buffer(normalized.x, x);
+    barretenberg::fq::serialize_to_buffer(normalized.y, y);
+}
 }
