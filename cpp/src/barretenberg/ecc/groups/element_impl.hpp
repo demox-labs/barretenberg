@@ -479,9 +479,9 @@ template <class Fq, class Fr, class T> constexpr element<Fq, Fr, T> element<Fq, 
 template <class Fq, class Fr, class T>
 element<Fq, Fr, T> element<Fq, Fr, T>::operator*(const Fr& exponent) const noexcept
 {
-    if constexpr (T::USE_ENDOMORPHISM) {
-        return mul_with_endomorphism(exponent);
-    }
+    // if constexpr (T::USE_ENDOMORPHISM) {
+    //     return mul_with_endomorphism(exponent);
+    // }
     return mul_without_endomorphism(exponent);
 }
 
