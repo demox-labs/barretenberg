@@ -1,6 +1,5 @@
 #pragma once
 #include "barretenberg/ecc/groups/element.hpp"
-#include <iostream>
 
 // NOLINTBEGIN(readability-implicit-bool-conversion, cppcoreguidelines-avoid-c-arrays)
 namespace barretenberg::group_elements {
@@ -83,7 +82,6 @@ template <class Fq, class Fr, class T> constexpr void element<Fq, Fr, T>::self_d
             return;
         }
     }
-
 
     // T0 = x*x
     Fq T0 = x.sqr();

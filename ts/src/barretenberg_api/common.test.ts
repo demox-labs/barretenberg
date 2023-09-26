@@ -13,14 +13,6 @@ describe('env', () => {
     await api.destroy();
   });
 
-  // it('thread test', async () => {
-  //   // Main thread doesn't do anything in this test, so -1.
-  //   const threads = (await api.getNumThreads()) - 1;
-  //   const iterations = 100000;
-  //   const result = await api.testThreads(threads, iterations);
-  //   expect(result).toBe(iterations);
-  // });
-
   it('should do point scalar multiplication', () => {
     const x = new Fq(BigInt('9488384720951639809707572357479649241125593886843713801844655093259905475658'));
     const y = new Fq(BigInt('16159185574012703085953752536106955829175932087014915348648613830635631153829'))

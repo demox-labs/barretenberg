@@ -8,7 +8,6 @@ namespace test_g1 {
 TEST(g1, RandomElement)
 {
     g1::element result = g1::element::random_element();
-    std::cout << "a long message to output???";
     EXPECT_EQ(result.on_curve(), true);
 }
 
