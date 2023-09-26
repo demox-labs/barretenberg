@@ -382,6 +382,11 @@ export class BarretenbergApi {
     return result[0];
   }
 
+  async pointScalar(p: Point, scalar: Fr): Promise<[Fq, Fq]> {
+    const result = await this.binder.callWasmExport('bn254_point_scalar', [p, scalar], [Fq, Fq]);
+    return [result[0], result[1]];
+  }
+
   async randomPolynomial(degree: number): Promise<Fr[]> {
     const result = await this.binder.callWasmExport('random_polynomial', [degree], [VectorDeserializer(Fr)]);
     return result[0];
@@ -420,13 +425,18 @@ export class BarretenbergApiSync {
     return result[0];
   }
 
-  pointScalar(px: Fq, py: Fq, scalar: Fr): [Fq, Fq] {
-    const result = this.binder.callWasmExport('bn254_point_scalar', [px, py, scalar], [Fq, Fq]);
+  pointScalar(p: Point, scalar: Fr): [Fq, Fq] {
+    const result = this.binder.callWasmExport('bn254_point_scalar', [p, scalar], [Fq, Fq]);
     return [result[0], result[1]];
   }
 
-  msm(points: Point[], scalars: Fr[]): [Fq, Fq] {
-    const result = this.binder.callWasmExport('bn254_msm', [points, scalars], [Fq, Fq]);
+  naiveMsm(points: Point[], scalars: Fr[]): [Fq, Fq] {
+    const result = this.binder.callWasmExport('bn254_naive_msm', [points, scalars], [Fq, Fq]);
+    return [result[0], result[1]];
+  }
+
+  pippengerMsm(points: Point[], scalars: Fr[]): [Fq, Fq] {
+    const result = this.binder.callWasmExport('bn254_pippenger', [points, scalars], [Fq, Fq]);
     return [result[0], result[1]];
   }
 

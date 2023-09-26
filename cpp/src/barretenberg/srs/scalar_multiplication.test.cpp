@@ -738,6 +738,7 @@ TYPED_TEST(ScalarMultiplicationTests, UndersizedInputs)
 
     barretenberg::scalar_multiplication::pippenger_runtime_state<Curve> state(num_points);
 
+    std::cout << "\nscalars: " << scalars << "\n";
     Element result = barretenberg::scalar_multiplication::pippenger<Curve>(scalars, points, num_points, state);
     result = result.normalize();
 
@@ -749,7 +750,7 @@ TYPED_TEST(ScalarMultiplicationTests, UndersizedInputs)
 
 TYPED_TEST(ScalarMultiplicationTests, PippengerSmall)
 {
-    using Curve = TypeParam;
+    using Curve = curve::BN254;
     using Element = typename Curve::Element;
     using AffineElement = typename Curve::AffineElement;
     using Fr = typename Curve::ScalarField;
@@ -772,8 +773,12 @@ TYPED_TEST(ScalarMultiplicationTests, PippengerSmall)
         expected += temp;
     }
     expected = expected.normalize();
+    std::cout << "expected: " << expected << "\n";
     barretenberg::scalar_multiplication::generate_pippenger_point_table<Curve>(points, points, num_points);
     barretenberg::scalar_multiplication::pippenger_runtime_state<Curve> state(num_points);
+
+    std::cout << "state: " << &state.round_counts << "\n";
+    std::cout << "num points: " << num_points << "\n";
 
     Element result = barretenberg::scalar_multiplication::pippenger<Curve>(scalars, points, num_points, state);
     result = result.normalize();

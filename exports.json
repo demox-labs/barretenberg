@@ -122,25 +122,6 @@
     ]
   },
   {
-    "functionName": "bn254_add_points",
-    "inArgs": [
-      {
-        "name": "left",
-        "type": "uint8_t"
-      },
-      {
-        "name": "right",
-        "type": "uint8_t"
-      }
-    ],
-    "outArgs": [
-      {
-        "name": "result",
-        "type": "uint8_t"
-      }
-    ]
-  },
-  {
     "functionName": "bn254_double_point",
     "inArgs": [
       {
@@ -167,12 +148,8 @@
     "functionName": "bn254_point_scalar",
     "inArgs": [
       {
-        "name": "p_x",
-        "type": "fq::in_buf"
-      },
-      {
-        "name": "p_y",
-        "type": "fq::in_buf"
+        "name": "point",
+        "type": "uint8_t"
       },
       {
         "name": "scalar",
@@ -191,7 +168,30 @@
     ]
   },
   {
-    "functionName": "bn254_msm",
+    "functionName": "bn254_naive_msm",
+    "inArgs": [
+      {
+        "name": "points_data",
+        "type": "g1::affine_element::vec_in_buf"
+      },
+      {
+        "name": "scalars_data",
+        "type": "fr::vec_in_buf"
+      }
+    ],
+    "outArgs": [
+      {
+        "name": "x",
+        "type": "fq::out_buf"
+      },
+      {
+        "name": "y",
+        "type": "fq::out_buf"
+      }
+    ]
+  },
+  {
+    "functionName": "bn254_pippenger_msm",
     "inArgs": [
       {
         "name": "points_data",

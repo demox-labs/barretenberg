@@ -21,7 +21,7 @@ pippenger_runtime_state<Curve>::pippenger_runtime_state(const size_t num_initial
     , num_buckets(static_cast<size_t>(1ULL << barretenberg::scalar_multiplication::get_optimal_bucket_width(
                                           static_cast<size_t>(num_initial_points))))
     , num_rounds(get_num_pippenger_rounds(static_cast<size_t>(num_points)))
-    , num_threads(get_num_cpus_pow2())
+    , num_threads(1)
     , prefetch_overflow(num_threads * 16)
     , point_schedule_ptr(
           get_mem_slab((static_cast<size_t>(num_points) * num_rounds + prefetch_overflow) * sizeof(uint64_t)))
@@ -43,6 +43,7 @@ pippenger_runtime_state<Curve>::pippenger_runtime_state(const size_t num_initial
     using Fq = typename Curve::BaseField;
     using AffineElement = typename Curve::AffineElement;
 
+    std::cout << "Num threads: " << num_threads << "\n";
     const auto num_points_floor = static_cast<size_t>(1ULL << (numeric::get_msb(num_points)));
     const auto num_buckets = static_cast<size_t>(
         1ULL << barretenberg::scalar_multiplication::get_optimal_bucket_width(static_cast<size_t>(num_initial_points)));
