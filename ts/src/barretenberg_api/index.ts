@@ -17,6 +17,83 @@ export class BarretenbergApi {
     await this.binder.wasm.destroy();
   }
 
+  async randomPoint(): Promise<Point> {
+    const result = await this.binder.callWasmExport('bn254_random_point', [], [Point]);
+    return result[0];
+  }
+
+  async addPoints(p1X: Fq, p1Y: Fq, p2X: Fq, p2Y: Fq): Promise<[Fq, Fq]> {
+    const result = await this.binder.callWasmExport('bn254_add_points', [p1X, p1Y, p2X, p2Y], [Fq, Fq]);
+    return [result[0], result[1]];
+  }
+
+  async doublePoint(pX: Fq, pY: Fq): Promise<[Fq, Fq]> {
+    const result = await this.binder.callWasmExport('bn254_double_point', [pX, pY], [Fq, Fq]);
+    return [result[0], result[1]];
+  }
+
+  async addFields(left: Fq, right: Fq): Promise<Fq> {
+    const result = await this.binder.callWasmExport('bn254_add_fields', [left, right], [Fq]);
+    return result[0];
+  }
+
+  async pointScalar(p: Point, scalar: Fr): Promise<[Fq, Fq]> {
+    const result = await this.binder.callWasmExport('bn254_point_scalar', [p, scalar], [Fq, Fq]);
+    return [result[0], result[1]];
+  }
+
+  async naiveMsm(points: Point[], scalars: Fr[]): Promise<[Fq, Fq]> {
+    const result = await this.binder.callWasmExport('bn254_naive_msm', [points, scalars], [Fq, Fq]);
+    return [result[0], result[1]];
+  }
+
+  async pippengerMsm(points: Point[], scalars: Fr[]): Promise<[Fq, Fq]> {
+    const result = await this.binder.callWasmExport('bn254_pippenger', [points, scalars], [Fq, Fq]);
+    return [result[0], result[1]];
+  }
+
+  async subFields(left: Fq, right: Fq): Promise<Fq> {
+    const result = await this.binder.callWasmExport('bn254_sub_fields', [left, right], [Fq]);
+    return result[0];
+  }
+
+  async mulFields(left: Fq, right: Fq): Promise<Fq> {
+    const result = await this.binder.callWasmExport('bn254_mul_fields', [left, right], [Fq]);
+    return result[0];
+  }
+
+  async invertField(input: Fq): Promise<Fq> {
+    const result = await this.binder.callWasmExport('bn254_invert_field', [input], [Fq]);
+    return result[0];
+  }
+
+  async expField(base: Fq, exp: Fq): Promise<Fq> {
+    const result = await this.binder.callWasmExport('bn254_exp_field', [base, exp], [Fq]);
+    return result[0];
+  }
+
+  async sqrtField(base: Fq): Promise<Fq> {
+    const result = await this.binder.callWasmExport('bn254_sqrt_field', [base], [Fq]);
+    return result[0];
+  }
+
+  // eslint-disable-next-line camelcase
+  async fft(coeff: Fr[], evaulation_domain: Ptr): Promise<Fr[]> {
+    // eslint-disable-next-line camelcase
+    const result = await this.binder.callWasmExport('fft', [coeff, evaulation_domain], [VectorDeserializer(Fr)]);
+    return result[0];
+  }
+
+  async randomPolynomial(degree: number): Promise<Fr[]> {
+    const result = await this.binder.callWasmExport('random_polynomial', [degree], [VectorDeserializer(Fr)]);
+    return result[0];
+  }
+
+  async newEvaluationDomain(degree: number): Promise<Ptr> {
+    const result = await this.binder.callWasmExport('new_evaluation_domain', [degree], [Ptr]);
+    return result[0];
+  }
+
   async pedersenCommit(inputsBuffer: Fr[]): Promise<Point> {
     const result = await this.binder.callWasmExport('pedersen___commit', [inputsBuffer], [Point]);
     return result[0];

@@ -1,6 +1,8 @@
 #include <barretenberg/common/serialize.hpp>
 #include <barretenberg/common/wasm_export.hpp>
 #include <barretenberg/ecc/curves/bn254/fr.hpp>
+#include <barretenberg/polynomials/polynomial_arithmetic.hpp>
+#include <barretenberg/polynomials/evaluation_domain.hpp>
 #include <cstddef>
 #include <cstdint>
 
@@ -53,3 +55,13 @@ WASM_EXPORT void acir_serialize_proof_into_fields(in_ptr acir_composer_ptr,
 WASM_EXPORT void acir_serialize_verification_key_into_fields(in_ptr acir_composer_ptr,
                                                              fr::vec_out_buf out_vkey,
                                                              fr::out_buf out_key_hash);
+
+WASM_EXPORT void fft(fr::vec_in_buf data, in_ptr* dom, fr::vec_out_buf out);
+
+WASM_EXPORT void random_polynomial(uint32_t const* n, fr::vec_out_buf out);
+
+WASM_EXPORT void free_polynomial(void* poly);
+
+WASM_EXPORT void new_evaluation_domain(uint32_t const* circuit_size, out_ptr out);
+
+WASM_EXPORT void delete_evaluation_domain(void* domain);

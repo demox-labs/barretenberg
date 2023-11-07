@@ -15,44 +15,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aztec/bb.js@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "@aztec/bb.js@workspace:."
-  dependencies:
-    "@jest/globals": ^29.4.3
-    "@types/debug": ^4.1.7
-    "@types/detect-node": ^2.0.0
-    "@types/jest": ^29.4.0
-    "@types/node": ^18.7.23
-    "@types/source-map-support": ^0.5.6
-    "@typescript-eslint/eslint-plugin": ^5.54.1
-    "@typescript-eslint/parser": ^5.54.1
-    buffer: ^6.0.3
-    comlink: ^4.4.1
-    commander: ^10.0.1
-    copy-webpack-plugin: ^11.0.0
-    debug: ^4.3.4
-    eslint: ^8.35.0
-    eslint-config-prettier: ^8.8.0
-    html-webpack-plugin: ^5.5.1
-    idb-keyval: ^6.2.1
-    jest: ^29.5.0
-    prettier: ^2.8.4
-    resolve-typescript-plugin: ^2.0.1
-    ts-jest: ^29.1.0
-    ts-loader: ^9.4.2
-    ts-node: ^10.9.1
-    tslib: ^2.4.0
-    typescript: ^5.0.4
-    webpack: ^5.82.1
-    webpack-cli: ^5.1.1
-    webpack-dev-server: ^4.15.0
-    worker-loader: ^3.0.8
-  bin:
-    bb.js: ./dest/node/main.js
-  languageName: unknown
-  linkType: soft
-
 "@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.12.13, @babel/code-frame@npm:^7.21.4":
   version: 7.21.4
   resolution: "@babel/code-frame@npm:7.21.4"
@@ -456,6 +418,44 @@ __metadata:
   checksum: 5718f267085ed8edb3e7ef210137241775e607ee18b77d95aa5bd7514f47f5019aa2d82d96b3bf342ef7aa890a346fa1044532ff7cc3009e7d24fce3ce6200fa
   languageName: node
   linkType: hard
+
+"@demox-labs/aztec-bb.js@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@demox-labs/aztec-bb.js@workspace:."
+  dependencies:
+    "@jest/globals": ^29.4.3
+    "@types/debug": ^4.1.7
+    "@types/detect-node": ^2.0.0
+    "@types/jest": ^29.4.0
+    "@types/node": ^18.7.23
+    "@types/source-map-support": ^0.5.6
+    "@typescript-eslint/eslint-plugin": ^5.54.1
+    "@typescript-eslint/parser": ^5.54.1
+    buffer: ^6.0.3
+    comlink: ^4.4.1
+    commander: ^10.0.1
+    copy-webpack-plugin: ^11.0.0
+    debug: ^4.3.4
+    eslint: ^8.35.0
+    eslint-config-prettier: ^8.8.0
+    html-webpack-plugin: ^5.5.1
+    idb-keyval: ^6.2.1
+    jest: ^29.5.0
+    prettier: ^2.8.4
+    resolve-typescript-plugin: ^2.0.1
+    ts-jest: ^29.1.0
+    ts-loader: ^9.4.2
+    ts-node: ^10.9.1
+    tslib: ^2.4.0
+    typescript: ^5.0.4
+    webpack: ^5.82.1
+    webpack-cli: ^5.1.1
+    webpack-dev-server: ^4.15.0
+    worker-loader: ^3.0.8
+  bin:
+    aztec-bb.js: ./dest/node/main.js
+  languageName: unknown
+  linkType: soft
 
 "@discoveryjs/json-ext@npm:^0.5.0":
   version: 0.5.7

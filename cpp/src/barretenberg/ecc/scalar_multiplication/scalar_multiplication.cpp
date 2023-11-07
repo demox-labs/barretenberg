@@ -883,7 +883,7 @@ typename Curve::Element pippenger(typename Curve::ScalarField* scalars,
     // If we fall below this theshold, fall back to the traditional scalar multiplication algorithm.
     // For 8 threads, this neatly coincides with the threshold where Strauss scalar multiplication outperforms
     // Pippenger
-    const size_t threshold = get_num_cpus_pow2() * 8;
+    // const size_t threshold = get_num_cpus_pow2() * 8;
 
     if (num_initial_points == 0) {
         Element out = Group::one;
@@ -891,18 +891,18 @@ typename Curve::Element pippenger(typename Curve::ScalarField* scalars,
         return out;
     }
 
-    if (num_initial_points <= threshold) {
-        std::vector<Element> exponentiation_results(num_initial_points);
-        // might as well multithread this...
-        // Possible optimization: use group::batch_mul_with_endomorphism here.
-        parallel_for(num_initial_points,
-                     [&](size_t i) { exponentiation_results[i] = Element(points[i * 2]) * scalars[i]; });
+    // if (num_initial_points <= threshold) {
+    //     std::vector<Element> exponentiation_results(num_initial_points);
+    //     // might as well multithread this...
+    //     // Possible optimization: use group::batch_mul_with_endomorphism here.
+    //     parallel_for(num_initial_points,
+    //                  [&](size_t i) { exponentiation_results[i] = Element(points[i * 2]) * scalars[i]; });
 
-        for (size_t i = num_initial_points - 1; i > 0; --i) {
-            exponentiation_results[i - 1] += exponentiation_results[i];
-        }
-        return exponentiation_results[0];
-    }
+    //     for (size_t i = num_initial_points - 1; i > 0; --i) {
+    //         exponentiation_results[i - 1] += exponentiation_results[i];
+    //     }
+    //     return exponentiation_results[0];
+    // }
 
     const auto slice_bits = static_cast<size_t>(numeric::get_msb(static_cast<uint64_t>(num_initial_points)));
     const auto num_slice_points = static_cast<size_t>(1ULL << slice_bits);

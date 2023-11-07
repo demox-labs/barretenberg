@@ -10,6 +10,7 @@
 #include "barretenberg/srs/global_crs.hpp"
 #include <cstdint>
 #include <memory>
+#include <cstdio>
 
 WASM_EXPORT void acir_get_circuit_sizes(uint8_t const* acir_vec, uint32_t* exact, uint32_t* total, uint32_t* subgroup)
 {
@@ -114,4 +115,39 @@ WASM_EXPORT void acir_serialize_verification_key_into_fields(in_ptr acir_compose
 
     *out_vkey = to_heap_buffer(vkey_as_fields);
     write(out_key_hash, vk_hash);
+}
+
+WASM_EXPORT void fft(fr::vec_in_buf data, in_ptr* dom, fr::vec_out_buf out)
+{
+    auto coefficients = from_buffer<std::vector<fr>>(data);
+    auto domain = reinterpret_cast<const evaluation_domain*>(*dom);
+
+    if (coefficients.size() > 0) {
+        polynomial_arithmetic::fft(coefficients.data(), *domain);
+    }
+
+    *out = to_heap_buffer(coefficients); 
+}
+
+WASM_EXPORT void random_polynomial(uint32_t const* n, fr::vec_out_buf out)
+{
+    std::vector<fr> poly(ntohl(*n));
+
+    for (size_t i = 0; i < ntohl(*n); ++i) {
+        poly[i] = fr::random_element();
+    }
+
+    *out = to_heap_buffer(poly); 
+}
+
+WASM_EXPORT void new_evaluation_domain(uint32_t const* circuit_size, out_ptr out)
+{
+    auto domain = new evaluation_domain(ntohl(*circuit_size));
+    domain->compute_lookup_table();
+    *out = domain;
+}
+
+WASM_EXPORT void delete_evaluation_domain(void* domain)
+{
+    delete reinterpret_cast<evaluation_domain*>(domain);
 }

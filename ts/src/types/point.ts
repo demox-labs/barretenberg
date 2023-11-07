@@ -1,20 +1,20 @@
-import { Fr } from './index.js';
+import { Fq } from './index.js';
 import { BufferReader } from '../serialize/buffer_reader.js';
 
 export class Point {
   static SIZE_IN_BYTES = 64;
-  static EMPTY = new Point(Fr.ZERO, Fr.ZERO);
+  static EMPTY = new Point(Fq.ZERO, Fq.ZERO);
 
-  constructor(public readonly x: Fr, public readonly y: Fr) {}
+  constructor(public readonly x: Fq, public readonly y: Fq) {}
 
   static random() {
     // TODO: This is not a point on the curve!
-    return new Point(Fr.random(), Fr.random());
+    return new Point(Fq.random(), Fq.random());
   }
 
   static fromBuffer(buffer: Uint8Array | BufferReader) {
     const reader = BufferReader.asReader(buffer);
-    return new this(Fr.fromBuffer(reader), Fr.fromBuffer(reader));
+    return new this(Fq.fromBuffer(reader), Fq.fromBuffer(reader));
   }
 
   static fromString(address: string) {
